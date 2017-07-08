@@ -1,22 +1,24 @@
+if (env.BRANCH_NAME.contains("master")) {
+	properties([
+	  buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '30')),
+	  disableConcurrentBuilds(),
+	  overrideIndexTriggers(true),
+	  pipelineTriggers([cron('@hourly')])
+	])
+} else {
+	properties([
+	  buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '30')),
+	  disableConcurrentBuilds(),
+	  overrideIndexTriggers(true),
+	  pipelineTriggers([])
+	])
+}
+
 pipeline {
 	
     agent any
 	
-	if (env.BRANCH_NAME.contains("master")) {
-		properties([
-		  buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '30')),
-		  disableConcurrentBuilds(),
-		  overrideIndexTriggers(true),
-		  pipelineTriggers([cron('@hourly')])
-		])
-	} else {
-		properties([
-		  buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '30')),
-		  disableConcurrentBuilds(),
-		  overrideIndexTriggers(true),
-		  pipelineTriggers([])
-		])
-	}
+
 
     stages {
         stage('Build') {
