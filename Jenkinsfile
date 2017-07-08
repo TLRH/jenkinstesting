@@ -2,7 +2,7 @@ pipeline {
 	
     agent any
 	
-	if (env.BRANCH_NAME.contains("master") {
+	if (env.BRANCH_NAME.contains("master")) {
 		properties([
 		  buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '30')),
 		  disableConcurrentBuilds(),
