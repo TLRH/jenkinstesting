@@ -1,13 +1,11 @@
+String cron_string = BRANCH_NAME == "master" ? "@hourly" : ""
+
 pipeline {
 	
     agent any
 	
 	triggers {
-		if (env.BRANCH_NAME == "master") {
-			cron('@hourly')
-		} else {
-			// Run on a manual basis
-		}
+		cron(cron_string)
 	}
 
     stages {
